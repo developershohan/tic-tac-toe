@@ -31,7 +31,7 @@ body {
   display: flex;
   justify-content: center;
   color: #fff;
-  font-size: 3vw;
+  font-size: 5rem;
 }
 .box {
   width: var(--box-size);
@@ -121,7 +121,7 @@ body {
   display: none;
 }
 .winner{
-  font-size: 5vw;
+  font-size: 5rem;
   color: #fff;
   text-transform: capitalize;
 }
