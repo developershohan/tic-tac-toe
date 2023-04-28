@@ -1,6 +1,8 @@
 const info = document.querySelector("#info")
 const board = document.querySelector(".board")
 const restartBtn = document.querySelector("#restartBtn")
+const result = document.querySelector(".result")
+const winner = document.querySelector(".winner")
 const boxes = Array.from(document.querySelectorAll(".box"))
 const boxs = document.querySelectorAll(".box")
 
@@ -25,13 +27,13 @@ function handleClick(e) {
         spaces[id] = currentPlayer
         e.target.classList.add(currentPlayer)
         if (playerHasWon() !== false) {
-            playerText.innerHTML = `${currentPlayer} has won!`
+        
             let winning_blocks = playerHasWon()
-            winning_blocks.map(box => boxes[box].style.backgroundColor = "#2d414b")
+            winning_blocks.map(box => boxes[box].style.backgroundColor = "#F2C14E")
+            result.style.display = "flex"
+            winner.innerHTML = `${currentPlayer} won!`
             boxes.forEach(box => {
-
                 box.removeEventListener('click', handleClick)
-            
             })
             return
         }
@@ -89,7 +91,7 @@ function restart() {
         playerText.innerHTML = "Tic Tac Toe"
         startGame()
     })
-
+    result.style.display = "none"
 
 }
 startGame()
