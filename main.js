@@ -45,7 +45,7 @@ count_play ++
     }
     if (count_play === 9) {
         result.style.display = "flex"
-        winner.innerHTML = "Draw!!f"
+        winner.innerHTML = "Draw!!"
     }
     setBoardHoverClass()
 }
