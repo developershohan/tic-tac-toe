@@ -10,6 +10,7 @@ const X_CLASS = "x"
 const CIRCLE_CLASS = "circle"
 let currentPlayer = X_CLASS
 let spaces = Array(9).fill(null)
+let count_play = 0
 
 const startGame = () => {
     boxes.forEach(box => box.addEventListener('click', handleClick))
@@ -20,15 +21,16 @@ const startGame = () => {
 
 //handleClick Logic
 function handleClick(e) {
-    console.log(e.target);
+
+
     const id = e.target.id
 
-    if (!spaces[id]) {
+    if (!spaces[id] && count_play < 9 ) {
         spaces[id] = currentPlayer
         e.target.classList.add(currentPlayer)
         if (playerHasWon() !== false) {
-        
             let winning_blocks = playerHasWon()
+            count_play = 10
             winning_blocks.map(box => boxes[box].style.backgroundColor = "#F2C14E")
             result.style.display = "flex"
             winner.innerHTML = `${currentPlayer} won!`
@@ -37,8 +39,13 @@ function handleClick(e) {
             })
             return
         }
+count_play ++
         currentPlayer = currentPlayer == X_CLASS ? CIRCLE_CLASS : X_CLASS
       
+    }
+    if (count_play === 9) {
+        result.style.display = "flex"
+        winner.innerHTML = "Draw!!f"
     }
     setBoardHoverClass()
 }
@@ -82,13 +89,12 @@ function playerHasWon() {
 restartBtn.addEventListener('click', restart)
 function restart() {
     spaces.fill(null)
-
+    count_play = 0
     boxes.forEach(box => {
         box.classList.remove(X_CLASS)
         box.classList.remove(CIRCLE_CLASS)
         box.removeEventListener('click', handleClick)
         box.style.backgroundColor = ''
-        playerText.innerHTML = "Tic Tac Toe"
         startGame()
     })
     result.style.display = "none"
